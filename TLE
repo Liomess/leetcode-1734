@@ -1,0 +1,22 @@
+class Solution:
+    def decode(self, encoded: List[int]) -> List[int]:
+        n=len(encoded)+1
+        arr=[0]*n
+        count=0
+        for i in range(1,n+1):
+            arr[0]=i
+            for j in range(len(encoded)):
+                val=arr[j]^encoded[j]
+                arr[j+1]=val
+            d={}
+            for idx,value in enumerate(arr):
+                if (value not in d) and value>=1 and value<=n:
+                    d[value]=idx
+                    count+=1
+            if count==n:
+                return arr
+            else:
+                count=0
+                del d
+                
+        
